@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Double click heart</title>
+    <style>
+        .main{
+            height: 97vh;
+            width: 100%;
+            background-color: blueviolet;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .icn{
+            color: red;
+        }
+        .img-div{
+            height: 60vh;
+            width: 350px;
+            margin-top: 30px;
+            position: relative;
+        }
+        .image{
+            height: 100%;
+            width: 100%;
+        }
+        .create-icon{
+            position: absolute;
+            font-size: 35px;
+            color: red;
+            animation: show 0.4s linear;
+            transform: scale(0);
+        }
+        @keyframes show {
+            0%{
+                transform: scale(0.3);
+                opacity: 1;
+            }
+            100%{
+                transform: scale(1.2);
+                opacity: 0;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h3>double click on the image of <i class="bi bi-heart-fill icn"></i> it</h3>
+        <div class="img-div">
+            <img class="image" src="https://wallpaperaccess.com/full/1210533.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        let imgdiv = document.querySelector(".img-div")
+        imgdiv.addEventListener("click", (e)=> {
+            let icon = document.createElement("i")
+            imgdiv.appendChild(icon)
+            icon.classList.add("bi", "bi-heart-fill","create-icon")
+            let left = `${e.x - imgdiv.offsetLeft}px`
+            let top = `${e.y - imgdiv.offsetTop}px`
+            icon.style.left = `${left}`
+            icon.style.top = `${top}`
+
+        })
+    </script>
+    
+</body>
+</html>

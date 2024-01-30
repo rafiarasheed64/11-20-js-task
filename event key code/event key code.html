@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVENT KEY CODE</title>
+    <style>
+        *{
+            margin: 0;
+            box-sizing: border-box;
+            padding: 0;
+        }
+        .main{
+            height: 100vh;
+            width: 100%;
+            background-color: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .subbox{
+            font-size: 20px;
+            padding: 20px;
+            background-color: white;
+            font-weight: 800;
+            border: 1px solid #999;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 150px;
+            position: relative;
+        }
+        .bx{
+            position: absolute;
+            top: -40px;
+            left: 0;
+            text-align: center;
+            width: 100%;
+            color: #555;
+            padding: 8px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+
+        <div class="box">
+            <div class="subbox">Press any key to get the keyCode</div>
+        </div>
+    </div>
+
+        <script>
+            let box = document.querySelector(".box")
+            window.addEventListener("keydown", (event)=>{
+                box.innerHTML = `
+                <div class = "subbox">
+                    <div class = "bx">event.key</div>
+                    ${event.key === "" ? "Space" : event.key}
+                    </div>
+                <div class = "subbox">
+                    <div class = "bx">event.keyCode</div>
+                    ${event.keyCode}
+                    </div>
+                <div class = "subbox">
+                    <div class = "bx">event.Code</div>
+                    ${event.code}
+                    </div>    
+                        `
+
+            })
+        </script>
+    
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRAGABLE SLIDER</title>
+    <style>
+        .main{
+            height: 100vh;
+            width: 100%;
+            background-color: aquamarine;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .slider{
+            position: relative;
+            width: 1000px;
+            height: 400px;
+            overflow: hidden;
+            cursor: grab;
+            border: 1px solid #000;
+        }
+        .slide-box{
+            display: grid;
+            grid-template-columns: repeat(6, 300px);
+            grid-gap: 50px;
+            position: absolute;
+            top: 0;
+        }
+        .slide{
+            border: 1px solid #000000;
+            border-radius: 10px;
+            /* margin-left: 30px; */
+        }
+        img{
+            height: 200px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>DRAGABLE SLIDER</h1>
+        <div class="slider">
+            <div class="slide-box">
+                <div class="slide">
+                    <img src="./pic1.jpg" alt="">
+                    <h1>CONTENT</h1>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas perferendis impedit magnam corporis sunt minima quia reiciendis aliquid laborum suscipit, natus ullam dignissimos pariatur accusamus tempora sequi, corrupti fugiat molestiae?</p>
+                </div>
+                <div class="slide">
+                    <img src="./pic2.jpg" alt="">
+                    <h1>CONTENT</h1>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas perferendis impedit magnam corporis sunt minima quia reiciendis aliquid laborum suscipit, natus ullam dignissimos pariatur accusamus tempora sequi, corrupti fugiat molestiae?</p>
+
+                </div>
+                <div class="slide">
+                    <img src="./pic3.jpg" alt="">
+                    <h1>CONTENT</h1>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas perferendis impedit magnam corporis sunt minima quia reiciendis aliquid laborum suscipit, natus ullam dignissimos pariatur accusamus tempora sequi, corrupti fugiat molestiae?</p>
+
+
+                </div>
+                <div class="slide">
+                    <img src="./pic4.jpg" alt="">
+                    <h1>CONTENT</h1>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas perferendis impedit magnam corporis sunt minima quia reiciendis aliquid laborum suscipit, natus ullam dignissimos pariatur accusamus tempora sequi, corrupti fugiat molestiae?</p>
+
+
+                </div>
+                <div class="slide">
+                    <img src="./pic5.jpg" alt="">
+                    <h1>CONTENT</h1>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas perferendis impedit magnam corporis sunt minima quia reiciendis aliquid laborum suscipit, natus ullam dignissimos pariatur accusamus tempora sequi, corrupti fugiat molestiae?</p>
+
+
+                </div>
+                <div class="slide">
+                    <img src="./pic6.jpg" alt="">
+                    <h1>CONTENT</h1>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas perferendis impedit magnam corporis sunt minima quia reiciendis aliquid laborum suscipit, natus ullam dignissimos pariatur accusamus tempora sequi, corrupti fugiat molestiae?</p>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let slider = document.querySelector(".slider")
+        let slidebox = document.querySelector(".slide-box")
+        let PressedDown = false;
+        let cursorXSpace;
+        window.addEventListener("mouseup", () => {
+            PressedDown = false;
+        })
+        slider.addEventListener("mousedown", (e) => {
+            PressedDown = true;
+            cursorXSpace = e.offsetX - slidebox.offsetLeft;
+            slider.style.cursor = "grabbing";
+        })
+        slider.addEventListener("mouseup", () => {
+            slider.style.cursor = "grab";
+        })
+        slider.addEventListener("mousemove", (e) => {
+            if (!PressedDown) return;
+            e.preventDefault();
+            slidebox.style.left = `${e.offsetX - cursorXSpace}px`;
+            boundCards()
+        })
+        function boundCards() {
+            let slider_rect = slider.getBoundingClientRect()
+            let slidebox_rect = slidebox.getBoundingClientRect()
+
+            console.log(slider_rect.right, "cont_right", slidebox_rect.right, "slider-right");
+
+            if (parseInt(slidebox.style.left) > 0) {
+                console.log(parseInt(slidebox.style.left), "llllll");
+                slidebox.style.left = "0px";
+            }
+            else if (slidebox_rect.right < slider_rect.right) {
+                slidebox.style.left = `-${slidebox_rect.width - slider_rect.width}px`;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // let cursorX
+        // let press = false
+        // slider.addEventListener("mousedown", (e)=>{
+        //     press = true
+        //     cursorX = e.offsetX - slidebox.offsetLeft
+        //     console.log(cursorX);
+        //     slider.style.cursor = "grabbing"
+        // })
+        // slider.addEventListener("mouseup", ()=>{
+        //     slider.style.cursor = "grab"
+        // })
+        // window.addEventListener("mouseup", ()=>{
+        //     press = false
+        // })
+        // slider.addEventListener("mousemove", (e)=>{
+        //     if(!press) return
+        //     e.preventDefault()
+        //     slidebox.style.left = `${e.offsetLeft - cursorX}px`
+        //     boundcards()
+        // })
+        // function boundcards(){
+        //     const slider_rect = slider.getBoundingClientRect()
+        //     const slidebox_rect =slidebox.getBoundingClientRect()
+        //     if(Number(slidebox.style.left) > 0){
+        //         slidebox.style.left = 0
+        //     }
+        //     else if(slidebox_rect.right < slider_rect.right){
+        //         slidebox.style.left = `-${slidebox_rect.width - slider_rect.width}px`
+        //     }
+
+
+
+        // }
+
+    </script>
+    
+</body>
+</html>

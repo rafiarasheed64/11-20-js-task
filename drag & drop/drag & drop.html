@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRAG & DROP</title>
+    <style>
+        *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .main{
+            height: 100vh;
+            width: 100%;
+            background-color: aquamarine;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box{
+            height: 200px;
+            width: 200px;
+            margin-left: 15px;
+            border: 1px solid #000;
+            background-color: white;
+        }
+        .image{
+            height: 100%;
+            width: 100%;
+            border: 1px solid #d14e4e;
+            cursor: pointer;
+            background-image:url(https://cdn.pixabay.com/photo/2016/07/07/16/46/dice-1502706_1280.jpg) ;
+            background-size: cover;
+
+        }
+        .hold{
+            border : 3px green solid;
+        }
+        .hover{
+            border: 3px black dashed;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="box">
+            <div class="image" draggable="true"></div>
+        </div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    
+    <script>
+        let boxes = document.querySelectorAll(".box")
+        let image = document.querySelector(".image")
+        image.addEventListener("dragstart", dragStart)
+        image.addEventListener("dragend", dragEnd)
+        for(let box of boxes){
+            box.addEventListener("dragover", dragOver)
+            box.addEventListener("dragenter", dragEnter)
+            box.addEventListener("dragleave", dragLeave)
+            box.addEventListener("drop", dragDrop)
+        }
+        function dragStart() {
+            this.className += " hold"
+            setTimeout(() => this.className = '', 0)
+        }
+        function dragEnd() {
+            this.className = " image"   
+        }
+        function dragOver(e) {
+            e.preventDefault()    
+        }
+        function dragEnter(e) {
+            e.preventDefault() 
+            this.className += " hover"   
+        }
+        function dragLeave() {
+            this.className = "box"   
+        }
+        function dragDrop() {
+            this.className = "box"
+            this.append(image)      
+        }
+    </script>
+</body>
+</html>

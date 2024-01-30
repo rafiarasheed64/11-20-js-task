@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRINKING WATER</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .main{
+            padding: 30px;
+            height: 100vh;
+            width: 100%;
+            background-color: skyblue;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .div{
+            background-color: #fff;
+            border: 4px solid blue;
+            border-radius: 0 0 40px 40px;
+            height: 330px;
+            width: 170px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .remained{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            
+        }
+        .percentage{
+            height: 0;
+            width: 100%;
+            background-color: rgb(6, 51, 92);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .div1{
+            width: 530px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .glass{
+            height: 90px;
+            width: 51px;
+            color: blue;
+            border: 3px solid #2e14c2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+        .clr{
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>DRINK WATER</h1>
+        <p>Goals: 2 liters</p>
+        <div class="div">
+            <div class="remained">
+                <p class="liters"></p>
+            </div>
+            <div class="percentage"></div>
+        </div>
+        <p>Select how many glasses of water that you have drink</p>
+        <div class="div1">
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+        </div>
+    </div>
+    <script>
+        let glass = document.querySelectorAll(".glass")
+        let remained = document.querySelector(".remained")
+        let liters = document.querySelector(".liters")
+        let percentage = document.querySelector(".percentage")
+
+        glass.forEach((ele , idx)=>{
+            ele.addEventListener("click", () =>{
+                highlightcup(idx)
+
+            })
+        }
+        )
+        function highlightcup(idx){
+            if(idx === 7 && glass[idx].classList.contains("clr")) idx--;
+            else if (glass[idx].classList.contains("clr") && !glass[idx].nextElementSibling.classList.contains("clr")){idx--};
+            glass.forEach((element , indx)=>{
+                if(indx <= idx){
+                    element.classList.add("clr")
+                }
+                else{
+                    element.classList.remove("clr")
+                }
+            })
+            bigGlass()
+        }
+        bigGlass()
+        function bigGlass(){
+            let filledglass = document.querySelectorAll(".clr").length
+
+            console.log(filledglass, "filled small glass");
+
+            if(filledglass === 0 ){
+                percentage.style.visibility = "hidden"
+                percentage.style.height = 0
+            }
+            else{
+                percentage.style.visibility = "visible"
+                percentage.style.height = `${filledglass / glass.length * 330}px`
+                percentage.innerHTML = `${filledglass / glass.length * 100}%`
+            }
+            if(filledglass === glass.length) {
+                remained.style.visibility = "hidden"
+                remained.style.height = 0
+            }
+            else {
+                remained.style.visibility = 'visible' 
+                liters.innerText = `${2 - (250 * filledglass / 1000)}L`
+            }
+        }
+        let idx = 0
+        glass.forEach((e, indx)=>{
+            e.addEventListener("click", function() {
+                if( e.classList.contains("clr")){
+                    e.classList.add("clr")
+                }  
+                else{
+                    e.classList.remove("clr")
+                }   
+            })
+        })
+
+    </script>   
+</body>
+</html>
